@@ -134,7 +134,8 @@
 \vspace{-1em}
 \begin{block}{Introduction}
 
-Today's GPU networks are largely dependant on communication performance of applications over the network. \textsuperscript{[1]}. As such the design and environment effects of performance on application is very pronounced and needs to be studied in general.
+Today's high-end HPC clusters employ many GPUs per node. The performance of applications on such a platform depends heavily on the interconnection network performance [1]. As such, it is important to understand the impact of hardware parameters on the overall application and system performance. In this research, we perform extensive simulation study to understand hardware parameters and their impact on the performance of HPC workload.
+
 
 \end{block}
 %----------------------------------------------------------------------------------------
@@ -142,61 +143,18 @@ Today's GPU networks are largely dependant on communication performance of appli
 %----------------------------------------------------------------------------------------
 \vspace{-1em}
 \begin{block}{Method}
-\textbf{Define the desired network} \newline We use two network topology that is implemented in TraceR-CODES simulator, 1d - Dragonfly and Fat-Tree with Adaptive Routing.
-
-\newline
-\textbf{We use the Number of GPU's per node from 1-GPU/Node, 2-GPU/Node, 4-GPU/Node and 8-GPU/Node}
-%\begin{itemize}
-%\vspace{-1em}
-
-\newline
-\textbf{We also use different Link bandwidths which is the ratio of base bandwidth X (10 Gbps), from x/8, x/4, x/2, x, 2x, 4x, 8x.}
-%\begin{itemize}
-%\vspace{-1em}
-
-%\item The new network model is created in CODES which takes the DOT file as input.
-%\item Runs simulation on that network topology.
-%\item Read an tapered fat tree which is similar to quartz.
-%\item Exact quartz topology from the dot file.
-
-%\end{itemize}
-%\begin{figure}
-%\centering
-%\begin{minipage}{.45\textwidth}
-%\begin{table}
-%\begin{adjustbox}{width=\columnwidth,left}
-
-%\begin{tabular}{|c|c|} \hline
-%\hline
-%\textbf{Parameters} & \textbf{Values}  \\ \hline
-%\cellcolor{ProcessBlue!10}Number of Levels  & \cellcolor{ProcessBlue!10}3   \\ %   \hline
-%Number of Terminals & 2688  \\    \hline
-%\cellcolor{ProcessBlue!10}Number of Leaf Switches & %\cellcolor{ProcessBlue!10}84  \\    \hline
-%Number of Aggregate Switches & 84  \\    \hline
-%\cellcolor{ProcessBlue!10}Number of Core Switches & %\cellcolor{ProcessBlue!10}32  \\    \hline
-%Number Of Pods & 11  \\    \hline
-%\end{tabular}
-%\end{adjustbox}
-
-
-%\caption{Quartz Topology}
-%\end{table}
-
-%\end{minipage}
-%\begin{minipage}{.45\textwidth}
-%\centering
-%\includegraphics[width=1\linewidth,height=0.5\linewidth]{qpods.pdf}
-%\captionsetup{labelformat=empty}
-%\caption{Quartz Pod,  8 leaf switch an 8 aggregate switch}
-%\end{minipage}
-%\end{figure}
-\vspace{2em}
+\textbf{System Configuration} 
+\begin{itemize}
+\item \textbf{Interconnection Network} Two network topology that is implemented in TraceR-CODES simulator, 1d - Dragonfly and Fat-Tree with Adaptive Routing.
+\item \textbf{Number of GPU's per node} from 1-GPU/Node, 2-GPU/Node, 4-GPU/Node and 8-GPU/Node configuration.
+\item \textbf{Link bandwidths} Base bandwidth x is 10 Gbps, from x/8, x/4, x/2, x, 2x, 4x, 8x bandwidths are used.
+\end{itemize}
 \begin{table}
 \begin{adjustbox}{width=\columnwidth,left}
 
 \begin{tabular}{|c|c|c|} \hline
 \hline
-\textbf{Traces} & \textbf{Computation} & \textbf{Communication} \\ \hline
+\textbf{Traces} & \textbf{Computation Intensive} & \textbf{Communication Intensive} \\ \hline
 \cellcolor{ProcessBlue!10}Stencil4d & \cellcolor{ProcessBlue!10}\xmark & \cellcolor{ProcessBlue!10}\CheckmarkBold  \\    \hline
 Kripke & \CheckmarkBold & \xmark  \\    \hline
 \cellcolor{ProcessBlue!10}Laghos & \cellcolor{ProcessBlue!10}\CheckmarkBold & \cellcolor{ProcessBlue!10}\xmark  \\    \hline
@@ -236,141 +194,10 @@ Amg & \CheckmarkBold  & \CheckmarkBold  \\    \hline
 %	Experimental Setup
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Experimental Setup}
+\begin{block}{Method}
 
-We are running 20 Workloads of randomly selected jobs from the above application from ranks 32, 64, 128, 256 and 512. We make sure that each application rank appears atleast 4 times across all workloads. 
-\begin{table}
-\begin{adjustbox}{width=\columnwidth,height=0.3\columnwidth,left,valign=m}
-
-\begin{tabular}{|c|c|c|c|c|c|} \hline
-%\hline
-% \multicolumn{}{c}{Workload 1}\\\hline
-\textbf{Jobs} & \textbf{32-Ranks} & \textbf{64-Ranks} & \textbf{128-Ranks}  & \textbf{256-Ranks} & \textbf{512-Ranks}\\ \hline
-\cellcolor{ProcessBlue!10}\textbf{Kripke} & \cellcolor{ProcessBlue!10}\textbf{4} & \cellcolor{ProcessBlue!10}\textbf{4} & \cellcolor{ProcessBlue!10}\textbf{4} & \cellcolor{ProcessBlue!10}\textbf{4} & \cellcolor{ProcessBlue!10}\textbf{5}  \\ \hline
-
-\textbf{Laghos} & \textbf{6} & \textbf{4} & \textbf{4} & \textbf{4} & \textbf{4}  \\ \hline
-
-\cellcolor{ProcessBlue!10}\textbf{Subcomm-A2A} & \cellcolor{ProcessBlue!10}\textbf{4} & \cellcolor{ProcessBlue!10}\textbf{6} & \cellcolor{ProcessBlue!10}\textbf{7} & \cellcolor{ProcessBlue!10}\textbf{10} & \cellcolor{ProcessBlue!10}\textbf{4}  \\ \hline
-
-\textbf{Stencil4D} & \textbf{4} & \textbf{4} & \textbf{8} & \textbf{8} & \textbf{4}  \\ \hline
-
-\cellcolor{ProcessBlue!10}\textbf{Sw4lite} & \cellcolor{ProcessBlue!10}\textbf{8}  & \cellcolor{ProcessBlue!10}\textbf{5}  & \cellcolor{ProcessBlue!10}\textbf{4}  & \cellcolor{ProcessBlue!10}\textbf{8}  & \cellcolor{ProcessBlue!10}\textbf{5}  \\ \hline
-
-\textbf{Amg} & \textbf{8} & \textbf{5} & \textbf{5} & \textbf{5} & \textbf{12}  \\ \hline
-
-%\multicolumn{1}{l}{}\\
-
-\end{tabular}
-
-%\begin{tabular}{|c|c|} \hline
-%\hline
-%\multicolumn{2}{c}{Workload 2}\\\hline
-%\textbf{Jobs} & \textbf{Ranks}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Subcomm-A2A} & \cellcolor{ProcessBlue!10}\textbf{64}  \\ \hline
-%\textbf{Subcomm-A2A} & \textbf{64}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Subcomm-A2A} & \cellcolor{ProcessBlue!10}\textbf{128}  \\ \hline
-%\textbf{Subcomm-A2A} & \textbf{512}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Laghos} & \cellcolor{ProcessBlue!10}\textbf{64}  \\ \hline
-%\textbf{Laghos} & \textbf{64}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Kripke} & \cellcolor{ProcessBlue!10}\textbf{256}  \\ \hline
-%\textbf{Laghos} & \textbf{512}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Kripke} & \cellcolor{ProcessBlue!10}\textbf{512}  \\ \hline
-%\textbf{Subcomm-A2A} & \textbf{128}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Stencil4D} & \cellcolor{ProcessBlue!10}\textbf{32}  \\ \hline
-%\multicolumn{1}{l}{}\\
-%\multicolumn{1}{l}{}\\
-%\end{tabular}
-%\begin{tabular}{|c|c|} \hline
-%\hline
-%\multicolumn{2}{c}{Workload 3}\\\hline
-%\textbf{Jobs} & \textbf{Ranks}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Laghos} & \cellcolor{ProcessBlue!10}\textbf{256}  \\ \hline
-%\textbf{Subcomm-A2A} & \textbf{256}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Kripke} & \cellcolor{ProcessBlue!10}\textbf{512}  \\ \hline
-%\textbf{Laghos} & \textbf{64}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Stencil4D} & \cellcolor{ProcessBlue!10}\textbf{512}  \\ \hline
-%\textbf{Stencil4D} & \textbf{128}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Laghos} & \cellcolor{ProcessBlue!10}\textbf{32}  \\ \hline
-%\textbf{Kripke} & \textbf{256}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Stencil4D} & \cellcolor{ProcessBlue!10}\textbf{256}  \\ \hline
-%\textbf{Stencil4D} &\textbf{32}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Kripke} & \cellcolor{ProcessBlue!10}\textbf{64}  \\ \hline
-%\textbf{Kripke} & \textbf{32}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Laghos} & \cellcolor{ProcessBlue!10}\textbf{64}  \\ \hline
-%\end{tabular}
-\end{adjustbox}
-\caption{Number of occurrences of each Application per rank across all workloads}
-\end{table}
-
-%\begin{table}
-%\begin{adjustbox}{width=\columnwidth,height=0.3\columnwidth,left}
-
-%\begin{tabular}{|c|c|} \hline
-%\hline
-%\multicolumn{2}{c}{Workload 1}\\\hline
-%\textbf{Jobs} & \textbf{Ranks}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Laghos} & \cellcolor{ProcessBlue!10}\textbf{32}  \\ \hline
-%\textbf{Stencil4D} & \textbf{32}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Subcomm-A2A} & \cellcolor{ProcessBlue!10}\textbf{64}  \\ \hline
-%\textbf{Laghos} & \textbf{512}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Laghos} & \cellcolor{ProcessBlue!10}\textbf{256}  \\ \hline
-%\textbf{Subcomm-A2A} & \textbf{512}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Stencil4D} & \cellcolor{ProcessBlue!10}\textbf{256}  \\ \hline
-%\textbf{Stencil4D} & \textbf{32}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Stencil4D} & \cellcolor{ProcessBlue!10}\textbf{128}  \\ \hline
-%\textbf{Stencil4D} & \textbf{256}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Laghos} & \cellcolor{ProcessBlue!10}\textbf{64}  \\ \hline
-%\textbf{Kripke} & \textbf{64}  \\ \hline
-%\cellcolor{ProcessBlue!10}\textbf{Stencil4D} & \cellcolor{ProcessBlue!10}\textbf{256}  \\ \hline
-%\textbf{Stencil4D} & \textbf{32}  \\ \hline
-
-%\end{tabular}
-
-% \begin{tabular}{|c|c|} \hline
-% \hline
-% \multicolumn{2}{c}{Workload 2}\\\hline
-% \textbf{Jobs} & \textbf{Ranks}  \\ \hline
-% \cellcolor{ProcessBlue!10}\textbf{Kripke} & \cellcolor{ProcessBlue!10}\textbf{32}  \\ \hline
-% \textbf{Laghos} &\textbf{512}  \\ \hline
-% \cellcolor{ProcessBlue!10}\textbf{Subcomm-A2A} & \cellcolor{ProcessBlue!10}\textbf{32}  \\ \hline
-% \textbf{Stencil4D} & \textbf{128}  \\ \hline
-% \cellcolor{ProcessBlue!10}\textbf{Stencil4D} & \cellcolor{ProcessBlue!10}\textbf{256}  \\ \hline
-% \textbf{Subcomm-A2A} &\textbf{256}  \\ \hline
-% \cellcolor{ProcessBlue!10}\textbf{Subcomm-A2A} & \cellcolor{ProcessBlue!10}\textbf{64}  \\ \hline
-% \textbf{Stencil4D} & \textbf{32}  \\ \hline
-% \cellcolor{ProcessBlue!10}\textbf{Laghos} & \cellcolor{ProcessBlue!10}\textbf{128}  \\ \hline
-% \textbf{Stencil4D} & \textbf{256}  \\ \hline
-% \cellcolor{ProcessBlue!10}\textbf{Stencil4D} & \cellcolor{ProcessBlue!10}\textbf{64}  \\ \hline
-% \textbf{Laghos} & \textbf{32}  \\ \hline
-% \cellcolor{ProcessBlue!10}\textbf{Stencil4D} & \cellcolor{ProcessBlue!10}\textbf{32}  \\ \hline
-% \multicolumn{1}{l}{}\\
-
-% \end{tabular}
-% \begin{tabular}{|c|c|} \hline
-% \hline
-% \multicolumn{2}{c}{Workload 3}\\\hline
-% \textbf{Jobs} & \textbf{Ranks}  \\ \hline
-% \cellcolor{ProcessBlue!10}\textbf{Stencil4D} & \cellcolor{ProcessBlue!10}\textbf{32}  \\ \hline
-% \textbf{Subcomm-A2A} & \textbf{512}  \\ \hline
-% \cellcolor{ProcessBlue!10}\textbf{Laghos} & \cellcolor{ProcessBlue!10}\textbf{256}  \\ \hline
-% \textbf{Kripke} & \textbf{512}  \\ \hline
-% \cellcolor{ProcessBlue!10}\textbf{Stencil4D} & \cellcolor{ProcessBlue!10}\textbf{64}  \\ \hline
-% \textbf{Kripke} & \textbf{256}  \\ \hline
-% \cellcolor{ProcessBlue!10}\textbf{Subcomm-A2A} & \cellcolor{ProcessBlue!10}\textbf{32}  \\ \hline
-% \textbf{Stencil4D} & \textbf{32}  \\ \hline
-% \multicolumn{1}{l}{}\\
-% \multicolumn{1}{l}{}\\
-% \multicolumn{1}{l}{}\\
-% \multicolumn{1}{l}{}\\
-% \multicolumn{1}{l}{}\\
-% \multicolumn{1}{l}{}\\
-
-% \end{tabular}
-% \end{adjustbox}
-% \caption{Workload with 8 Tasks per Node}
-% \end{table}
+We are running 20 Workloads of randomly selected jobs from the above application from ranks 32, 64, 128, 256 and 512. We make sure that each rank of an application appears atleast 4 times across all 20 workloads. 
 \end{block}
-
 %----------------------------------------------------------------------------------------
 
 \end{column} % End of column 2.1
