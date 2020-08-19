@@ -1,4 +1,4 @@
-MAIN=paper
+MAIN=main
 
 all: $(MAIN).pdf
 
