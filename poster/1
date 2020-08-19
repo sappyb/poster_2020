@@ -245,40 +245,40 @@ We are running 20 Workloads of randomly selected jobs from the above application
 \textbf{First}, Impact of Number of GPU's per node on Application performance. 
 \begin{figure}
 \centering
-\begin{minipage}{.45\textwidth}
+\begin{minipage}{.95\textwidth}
 \centering
 \includegraphics[width=1\linewidth]{figs/dfly-x-mapping-comm.eps}
 \captionsetup{labelformat=empty}
 \caption{Communication Apps}
 \label{fig:13a}
 \end{minipage}
-\begin{minipage}{.45\textwidth}
-\centering
-\includegraphics[width=1\linewidth]{figs/dfly-x-mapping-comp-new.eps}
-\captionsetup{labelformat=empty}
-\caption{Amg, Sw4lite Proxy}
-\label{fig:13b}
-\end{minipage}
+%\begin{minipage}{.45\textwidth}
+%\centering
+%\includegraphics[width=1\linewidth]{figs/dfly-x-mapping-comp-new.eps}
+%\captionsetup{labelformat=empty}
+%\caption{Amg, Sw4lite Proxy}
+%\label{fig:13b}
+%\end{minipage}
 \captionsetup{labelformat=empty}
 \caption{1d-Dragonfly Topology}
 \end{figure}
 
 \begin{figure}
 \centering
-\begin{minipage}{.45\textwidth}
+\begin{minipage}{.95\textwidth}
 \centering
 \includegraphics[width=1\linewidth]{figs/ftree-x-mapping-comm.eps}
 \captionsetup{labelformat=empty}
 \caption{Communication Apps}
 \label{fig:13a}
 \end{minipage}
-\begin{minipage}{.45\textwidth}
-\centering
-\includegraphics[width=1\linewidth]{figs/ftree-x-mapping-comp-new.eps}
-\captionsetup{labelformat=empty}
-\caption{Amg, Sw4lite Proxy}
-\label{fig:13b}
-\end{minipage}
+%\begin{minipage}{.45\textwidth}
+%\centering
+%\includegraphics[width=1\linewidth]{figs/ftree-x-mapping-comp-new.eps}
+%\captionsetup{labelformat=empty}
+%\caption{Amg, Sw4lite Proxy}
+%\label{fig:13b}
+%\end{minipage}
 \captionsetup{labelformat=empty}
 \caption{Fat-Tree Topology}
 \end{figure}
